@@ -27,6 +27,7 @@ Riyda.Connector = (function(){
     };
     
     ConnectorProto.onReceive = function( receiver ){
+        util.assert( receiver instanceof Function );
         this._messageReceiver = receiver;
     };
     
