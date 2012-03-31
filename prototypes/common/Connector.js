@@ -78,6 +78,16 @@ Riyda.Connector = (function(){
         return this._id;
     };
     
+    /// Sets new values for the latency and latency variation.
+    ///
+    /// @param {number?}    latency     The desired minimum latency in ms.
+    /// @param {number?}    varation    The percentage varation in latency.
+    ConnectorProto.setLatency = function( latency, variation ){
+        util.assert( !isNaN( latency ) || !isNaN( variation ) );
+        this._latency          = latency   || this._latency;
+        this._latencyVariation = variation || this._latencyVaration;
+    };
+    
     return Connector;
 })();
 
