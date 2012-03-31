@@ -23,6 +23,15 @@ var util = {
         }
     },
 
+    /// Generates a new random ID.
+    ///
+    /// @return {string} The new ID string.
+    'generateID' : function(){
+        var id = Math.ceil( Math.random() * 0xffff )
+               * Math.ceil( Math.random() * 0xffff );
+        return '_id:' + id;
+    },
+
     /// Sets up `derived` to inherit from `base`.
     ///
     /// @param {function}   base    The base class constructor.
