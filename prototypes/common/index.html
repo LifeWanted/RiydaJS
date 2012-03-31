@@ -2,39 +2,20 @@
 <html>
 <head>
     <title>RiydaJS Server Framework Demo</title>
-    <link rel="stylesheet" type="text/css" href="/common/style.css"></script>
-    <script type="application/javascript" src="/common/Application.js"></script>
-    <script type="application/javascript" src="/common/Client.js"></script>
-    <script type="application/javascript" src="/common/Connector.js"></script>
-    <script type="application/javascript" src="/common/Server.js"></script>
-    <script type="application/javascript" src="/common/utilities.js"></script>
-    <script type="application/javascript" src="/common/jquery.js"></script>
-    <script type="application/javascript">
-        var app;
-        var client;
-
-        var Demo = {};
-        Demo.Client = (function(){
-            function Client(){
-                this._super();
-            }
-            util.inherit( Riyda.Client, Client );
-            
-        })();
-
-        $(function(){
-            app = new Riyda.Application();
-            app.init();
-            client = new Demo.Client();
-            client.start();
-        };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../common/style.css"></script>
+    <script type="application/javascript" src="../common/Application.js"></script>
+    <script type="application/javascript" src="../common/Client.js"></script>
+    <script type="application/javascript" src="../common/Connector.js"></script>
+    <script type="application/javascript" src="../common/Server.js"></script>
+    <script type="application/javascript" src="../common/utilities.js"></script>
+    <script type="application/javascript" src="../common/jquery.js"></script>
+    <script type="application/javascript" src="demo.js"></script>
 </head>
 <body>
     <div>
-        This is a demo application using the RiydaJS Framework.
+        This is a demo application using the RiydaJS Framework. Open the console
+        and run `client.start()` to begin the demo.
     </div>
-    <div class="terminal"></div>
 </body>
 </html>
 
