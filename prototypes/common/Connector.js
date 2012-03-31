@@ -11,24 +11,56 @@ Riyda.Connector = (function(){
         this._latencyVariation = 0.25;
     }
     var ConnectorProto = Connector.prototype;
+
+    /// Sends a message to the given receiver after a random delay.
+    ///
+    /// @param {*}          message     The message to send.
+    /// @param {function}   receiver    The function to receive the message.
+    function _send( message, receiver ){
+        util.assert( this instanceof Connector );
+        var latency = this._latency;
+        latency += Math.random() * this._latencyVariation * latency;
+        setTimeout( function(){
+            util.assert( receiver instanceof Function );
+            receiver( message );
+        }, latency );
+    }
     
+    /// Connect this `Connector` to the `Server`.
     ConnectorProto.connect = function(){
         Riyda.Application.getSingleton().getServer().connect( this );
     };
 
-    ConnectorProto.send = function( message ){
-        message.originatorID = this.getID();
-        var latency = this._latency;
-        var self = this;
-        setTimeout( function(){
-            util.assert( self._messageReceiver instanceof Function );
-            self._messageReceiver( message );
-        }, latency );
+    /// Sends a message to the `Server`.
+    ///
+    /// @param {*} message The message to send.
+    ConnectorProto.toServer = function( message ){
+        _send.call( this, message, this._serverReceiver );
     };
     
-    ConnectorProto.onReceive = function( receiver ){
+    /// Sends a message to the `Connector`'s `Client`.
+    ///
+    /// @param {*} message The message to send.
+    ConnectorProto.toClient = function( message ){
+        _send.call( this, message, this._clientReceiver );
+    };
+    
+    /// Sets the `Server` message receiver function.
+    ///
+    /// @param {function} receiver  The function that will receive messages for
+    ///                             the server.
+    ConnectorProto.onServerReceive = function( receiver ){
         util.assert( receiver instanceof Function );
-        this._messageReceiver = receiver;
+        this._serverReceiver = receiver;
+    };
+    
+    /// Sets the `Client` message receiver function.
+    ///
+    /// @param {function} receiver  The function that will receive messages for
+    ///                             the client.
+    ConnectorProto.onClientReceive = function( receiver ){
+        util.assert( receiver instanceof Function );
+        this._clientReceiver = receiver;
     };
     
     return Connector;
