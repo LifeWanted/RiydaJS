@@ -42,14 +42,14 @@ Riyda.Connector = (function(){
     /// Sends a message to the `Server`.
     ///
     /// @param {*} message The message to send.
-    ConnectorProto.toServer = function( message ){
+    ConnectorProto.sendToServer = function( message ){
         _send.call( this, message, this._serverReceiver );
     };
     
     /// Sends a message to the `Connector`'s `Client`.
     ///
     /// @param {*} message The message to send.
-    ConnectorProto.toClient = function( message ){
+    ConnectorProto.sendToClient = function( message ){
         _send.call( this, message, this._clientReceiver );
     };
     
