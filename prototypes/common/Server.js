@@ -3,12 +3,15 @@ var Riyda = Riyda || {};
 
 /// The `Server` class should be subclassed 
 Riyda.Server = (function(){
+    function Server(){
+    }
+
     /// Server constructor.
     /// @constructor
-    function Server(){
+    Server._super = function(){
         this._connections = {};
         this._id = util.generateID();
-    }
+    };
     var ServerProto = Server.prototype;
 
     /// Handles receiving messges from the `Server`.

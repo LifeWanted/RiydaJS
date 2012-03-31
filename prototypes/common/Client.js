@@ -5,17 +5,23 @@ var Riyda = Riyda || {};
 ///
 /// Do not forget to call `this._super()` in the subclass constructor.
 Riyda.Client = (function(){
+    /// Client class.
+    function Client(){
+    }
+    
     /// Client constructor.
     /// @constructor
     ///
-    /// Be sure that the `Application` is built and initialized before
-    /// constructing the `Client`.
-    function Client(){
-        this._connector = new Riyda.Connector();
+    /// Be sure the `Applicaiton` is constructed and initialized before creating
+    /// the `Client`.
+    Client._super = function(){
+        util.assert( this instanceof Client );
+        this._id = util.generateID();
+        this._connector = new Riyda.Connector( this._id );
         this._connector.onClientReceive( _receiveMessage.bind( this ) );
         this._connector.connect();
-        this._id = util.generateID();
-    }
+    };
+    
     var ClientProto = Client.prototype;
 
     /// Handles receiving messges from the `Server`.
