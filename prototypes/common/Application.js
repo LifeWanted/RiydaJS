@@ -32,6 +32,14 @@ Riyda.Application = (function(){
         this._server = new Riyda.Server();
     };
 
+    /// Sets the `Application`'s `Server` instance.
+    ///
+    /// @param {Riyda.Server}   server  The new `Server` to use.
+    ApplicationProto.setServer = function( server ){
+        util.assert( server instanceof Riyda.Server );
+        this._server = server;
+    };
+
     /// Retrieves the `Application`'s `Server` instance.
     ApplicationProto.getServer = function(){
         util.assert( this._server instanceof Riyda.Server );
