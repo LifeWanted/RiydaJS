@@ -44,6 +44,13 @@ Riyda.Client = (function(){
         message.originatorID = this._id;
         this._connector.sendToServer( message );
     };
+    
+    /// Fetches the `Client`'s connection to the `Server`.
+    ///
+    /// @return {Riyda.Connector} The connector.
+    ClientProto.getConnector = function(){
+        return this._connector;
+    };
 
     return Client;
 })();
