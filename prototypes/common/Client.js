@@ -8,9 +8,14 @@ var Riyda = Riyda || {};
 Riyda.Client = (function(){
     /// Client constructor.
     /// @constructor
+    ///
+    /// Be sure that the `Application` is built and initialized before
+    /// constructing the `Client`.
     function Client(){
         this._connector = new Riyda.Connector();
         this._connector.onClientReceive( _receiveMessage.bind( this ) );
+        this._connector.connect();
+        this._id = util.generateID();
     }
     var ClientProto = Client.prototype;
 
@@ -26,6 +31,11 @@ Riyda.Client = (function(){
     ///
     /// @param {*}  message The message received.
     ClientProto.messageReceived = util.abstract( 'Client.messageReceived' );
+
+    ClientProto.send = function( message ){
+        message.originatorID = this._id;
+        this._connector.sendToServer( message );
+    };
 
     return Client;
 })();
