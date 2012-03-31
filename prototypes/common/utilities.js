@@ -18,7 +18,7 @@ var util = {
     ///
     /// @param {boolean}    val The value to assert for truth.
     'assert' : function( val ){
-        if( val ){
+        if( !val ){
             throw new Error( 'Assertion failure.' );
         }
     },
