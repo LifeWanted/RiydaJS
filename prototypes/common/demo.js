@@ -1,6 +1,6 @@
 
 function log( message ){
-    console.log( (new Date()) + ': ' + message );
+    console.log( (new Date()) + ': ' + message.message );
 }
 
 var Demo = {};
@@ -13,11 +13,11 @@ Demo.Client = (function(){
     
     ClientProto.messageReceived = function( message ){
         log( message );
-        this.send( 'Ping' );
+        this.send( { 'message' : 'Ping' } );
     };
     
     ClientProto.start = function(){
-        this.send( 'Ping' );
+        this.send( { 'message' : 'Ping' } );
     };
     
     return Client;
@@ -32,7 +32,7 @@ Demo.Server = (function(){
 
     ServerProto.messageReceived = function( message ){
         log( message );
-        this.send( message.originatorID, 'Pong' );
+        this.send( message.originatorID, { 'message' : 'Pong' } );
     }
     
     return Server;
