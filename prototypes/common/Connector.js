@@ -84,8 +84,12 @@ Riyda.Connector = (function(){
     /// @param {number?}    varation    The percentage varation in latency.
     ConnectorProto.setLatency = function( latency, variation ){
         util.assert( !isNaN( latency ) || !isNaN( variation ) );
-        this._latency          = latency   || this._latency;
-        this._latencyVariation = variation || this._latencyVaration;
+        if( !isNaN( latency ) ){
+            this._latency = latency;
+        }
+        if( !isNaN( variation ) ){
+            this._latencyVariation = variation;
+        }
     };
     
     return Connector;
