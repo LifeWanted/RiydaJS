@@ -25,7 +25,7 @@ Riyda.Server = (function(){
     ServerProto.connect = function( connector ){
         util.assert( connector instanceof Riyda.Connector );
         this._connections[ connector.getID() ] = connector;
-        connector.onReceive( _receiveMessage.bind( this ) );
+        connector.onServerReceive( _receiveMessage.bind( this ) );
     };
 
     /// Abstract method for handling new messages.
