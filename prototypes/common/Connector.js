@@ -6,9 +6,17 @@ var Riyda = Riyda || {};
 /// This class sends and receives messages with a delay that emulates network
 /// latency.
 Riyda.Connector = (function(){
-    function Connector(){
-        this._latency = 50;
-        this._latencyVariation = 0.25;
+    /// Connector constructor.
+    /// @constructor
+    ///
+    /// @param {string}     id          The ID of the owning entity.
+    /// @param {number?}    latency     The minimum simulated latency in ms.
+    /// @param {number?}    variation   The percentage variation in the latency.
+    function Connector( id, latency, variation ){
+        util.assert( id );
+        this._id = id;
+        this._latency = latency || 50;
+        this._latencyVariation = variation || 0.25;
     }
     var ConnectorProto = Connector.prototype;
 
@@ -61,6 +69,13 @@ Riyda.Connector = (function(){
     ConnectorProto.onClientReceive = function( receiver ){
         util.assert( receiver instanceof Function );
         this._clientReceiver = receiver;
+    };
+    
+    /// Returns the ID of the owning entity.
+    ///
+    /// @return {string} The ID.
+    ConnectorProto.getID = function(){
+        return this._id;
     };
     
     return Connector;
