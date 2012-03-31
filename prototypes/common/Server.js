@@ -37,7 +37,7 @@ Riyda.Server = (function(){
     ///
     /// @param {string} clientID    The ID of the client to send to.
     /// @param {*}      message     The message to send.
-    ServerProto.send( clientID, message ){
+    ServerProto.send = function( clientID, message ){
         util.assert( this._connections[ clientID ] instanceof Riyda.Connector );
         message.originatorID = this._id;
         this._connections[ clientID ].sendToClient( message );
@@ -46,7 +46,7 @@ Riyda.Server = (function(){
     /// Sends the message to all `Client`s connected to the `Server`.
     ///
     /// @param {*}  message The message to send.
-    ServerProto.sendToAll( message ){
+    ServerProto.sendToAll = function( message ){
         for( var id in this._connections ){
             this.send( id, message );
         }

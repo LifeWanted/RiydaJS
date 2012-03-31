@@ -26,10 +26,10 @@ Riyda.Application = (function(){
 
     /// Initializes the application.
     ///
-    /// This creates a new `Server` and sets up other things required for the
-    /// `Application` framework to work.
+    /// This performs checks to make sure it has everything required to run and
+    /// also sets up other data.
     ApplicationProto.init = function(){
-        this._server = new Riyda.Server();
+        util.assert( this._server instanceof Riyda.Server );
     };
 
     /// Sets the `Application`'s `Server` instance.
