@@ -7,17 +7,24 @@ var Demo = {};
 Demo.Client = (function(){
     function Client(){
         this._super();
+        this.getConnector().setLatency( 500 );
     }
     util.inherit( Riyda.Client, Client );
     var ClientProto = Client.prototype;
     
     ClientProto.messageReceived = function( message ){
         log( message );
-        this.send( { 'message' : 'Ping' } );
+        if( !this._stop ){
+            this.send( { 'message' : 'Ping' } );
+        }
     };
     
     ClientProto.start = function(){
         this.send( { 'message' : 'Ping' } );
+    };
+    
+    ClientProto.stop = function(){
+        this._stop = true;
     };
     
     return Client;
