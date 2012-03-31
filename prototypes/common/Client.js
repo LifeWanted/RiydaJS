@@ -3,8 +3,7 @@ var Riyda = Riyda || {};
 
 /// The `Client` class should be subclassed for each specific client task.
 ///
-/// Do not forget to call `this._super.call( this )` in the subclass
-/// constructor.
+/// Do not forget to call `this._super()` in the subclass constructor.
 Riyda.Client = (function(){
     /// Client constructor.
     /// @constructor
