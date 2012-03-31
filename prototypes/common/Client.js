@@ -32,6 +32,9 @@ Riyda.Client = (function(){
     /// @param {*}  message The message received.
     ClientProto.messageReceived = util.abstract( 'Client.messageReceived' );
 
+    /// Sends a message to the `Server`.
+    ///
+    /// @param {*}  message The message to send.
     ClientProto.send = function( message ){
         message.originatorID = this._id;
         this._connector.sendToServer( message );
