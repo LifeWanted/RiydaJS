@@ -1,3 +1,6 @@
+// [oz] I think this class could be better named. I do not know what a "utility
+//      item" is. From the code it seems to be any item that can have other
+//      items put in it or hang from it such as a backpack or belt.
 //This class describes the utility items.
 
 var Utility = function(width){
@@ -16,6 +19,10 @@ Utility.prototype.emptySpace = function(){
     return(emptySpace);
 };
 
+// [oz] You seem to have a lot of classes with a `contents` member and `add` and
+//      `weightReport` methods. You should add a `Container` (or similarly
+//      named) base class with these methods and have these other classes
+//      inherit from it.
 //This function adds new items to the inventory after checking their size.
 Utility.prototype.add = function(item){
     var itemID = item.itemID;
