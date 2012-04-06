@@ -1,3 +1,6 @@
+// [oz] This is workable on a small scale, but I would not expand beyond this
+//      for this prototype since it is more about how the GUI will work.
+
 //This lists all the items in the game that are relevant to each category.
 //Items can be in multiple cetegories by being on multiple lists.
 

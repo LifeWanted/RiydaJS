@@ -1,5 +1,7 @@
 var Inv = Inv || {};
 
+// [oz] When are you planning to add the GUI parts? That is the more important
+//      part of this prototype.
 /// The `Inventory` object stores items on a high resolution grid. This effect
 /// is simulated as of now because it requires a GUI to operate.
 Inv.Inventory = (function(){
