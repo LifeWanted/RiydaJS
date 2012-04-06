@@ -39,7 +39,14 @@ var util = {
     'inherit' : function( base, derived ){
         derived.prototype = new base();
         derived.prototype.constructor = derived;
-        derived.prototype._super = base._super || base;
+        derived.prototype._super = function(){
+            if( base._super instanceof Function ){
+                base._super.apply( this, arguments );
+            }
+            else {
+                base.apply( this, arguments );
+            }
+        };
     }
 
 };
