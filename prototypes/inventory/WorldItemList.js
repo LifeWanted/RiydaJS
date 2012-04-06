@@ -56,7 +56,8 @@ var WORLDLIST = {
     }
 };
 
-
+// [oz] These classes are small enough that they can go in one file, but I would
+//      recommend putting them in a separate file from the item list above.
 //The basic item class is used to populate the basic item list object.
 //It stores attributes universally shared by all items in Riyda.
 var BasicItem = function(name,width,height,weight,value){

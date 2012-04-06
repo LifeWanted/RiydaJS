@@ -1,3 +1,5 @@
+// [oz] This class is never used. Are the other item classes listed in
+//      WorldItemList.js supposed to inherit from this one?
 //all items will be unique objects in code with some unique qualities
 //every item will reference an item from the world list for it's generic properties.
 var ItemClass = function(itemID,name){
