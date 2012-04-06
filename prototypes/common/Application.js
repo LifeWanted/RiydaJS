@@ -11,6 +11,7 @@ Riyda.Application = (function(){
     function Application(){
         util.assert( _instance == null );
         _instance = this;
+        this._actors = {};
     }
     var ApplicationProto = Application.prototype;
 
@@ -46,6 +47,23 @@ Riyda.Application = (function(){
         return this._server;
     };
 
+    /// Adds an actor to the `Application`'s index.
+    ///
+    /// @param {Riyda.Actor} actor The `Actor` to add.
+    ApplicationProto.addActor = function( actor ){
+        util.assert( actor instanceof Riyda.Actor );
+        this._actors[ actor.getID() ] = actor;
+    };
+
+    /// Retrieves the identified actor.
+    ///
+    /// @param {string} actorID The ID of the `Actor` to get.
+    ///
+    /// @return {Riyda.Actor} The `Actor` requested.
+    ApplicationProto.getActor = function( actorID ){
+        util.assert( this._actors[actorID] instanceof Riyda.Actor );
+        return this._actors[actorID];
+    };
+
     return Application;
 })();
-
