@@ -16,12 +16,13 @@ Combat.Client = (function(){
     
     ClientProto.help = function(){
         console.log(
-            "This is a prototype of the Riyda combat system. As the "   +
-            "player you perform all your actions through the global "   +
-            "`me` object. This object has the following controls:\n"    +
-            "  me.status()          : \n"   +
-            "  me.getAttacks()      : \n"   +
-            "  me.attack( move )    : \n"   +
+            "This is a prototype of the Riyda combat system. As the player you perform all "    +
+            "your actions through the global `me` object. This object has the following "       +
+            "controls:\n"                                                                       +
+            "  me.ailments()        : Lists the active status effects.\n"                       +
+            "  me.status()          : Lists the player's health and status effects.\n"          +
+            "  me.getAttacks()      : Lists the moves the player can use to attack.\n"          +
+            "  me.attack( move )    : Performs the named attack.\n"   +
             "\n"
         );
     };
