@@ -1,5 +1,7 @@
 
+// External variables.
 var Riyda = Riyda || {};
+var util  = util  || null;
 
 Riyda.Application = (function(){
     var _instance = null;
@@ -9,7 +11,9 @@ Riyda.Application = (function(){
     ///
     /// @throws {Error} If an instance already exists.
     function Application(){
-        util.assert( _instance == null );
+    }
+    Application._super = function(){
+        util.assert( _instance === null );
         _instance = this;
         this._actors = {};
     }
