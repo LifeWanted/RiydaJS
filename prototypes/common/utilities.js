@@ -16,11 +16,35 @@ util.abstract = function( methodName ){
 ///
 /// @throws {Error} If `val` is not true.
 ///
-/// @param {boolean}    val The value to assert for truth.
-util.assert = function( val ){
+/// @param {boolean}    val     The value to assert for truth.
+/// @param {string?}    message An optional message to put in the error.
+util.assert = function( val, message ){
     if( !val ){
-        throw new Error( 'Assertion failure.' );
+        var error = 'Assertion failure' + (message ? ': ' + message : '') + '.';
+        throw new Error( error );
     }
+};
+
+/// Asserts that `obj` is an instance of the class `clas`.
+///
+/// @throws {Error} If `obj` is not an instance of `clas`.
+///
+/// @param {*}          obj     The object to test.
+/// @param {function}   clas    The class to test for.
+util.assert.instance = function( obj, clas ){
+    util.assert(
+        obj instanceof clas,
+        'Not an instance of ' + util.getFunctionName( clas )
+    );
+};
+
+/// Asserts that `func` is a function.
+///
+/// @throws {Error} If `func` is not a function.
+///
+/// @param {*} func The object to test.
+util.assert.isFunction = function( func ){
+    util.assert( func instanceof Function, 'Not a function' );
 };
 
 /// Generates a new random ID.
@@ -30,6 +54,16 @@ util.generateID = function(){
     var id = Math.ceil( Math.random() * 0xffff ) *
              Math.ceil( Math.random() * 0xffff );
     return '_id:' + id;
+};
+
+/// Retrieves the name of the provided function.
+///
+/// @param {function} func The function to get the name of.
+///
+/// @return {string} The name of the provided function.
+util.getFunctionName = function( func ){
+    util.assert.isFunction( func );
+    return func.toString().match( /^function (\w+)/ )[1];
 };
 
 /// Sets up `derived` to inherit from `base`.
