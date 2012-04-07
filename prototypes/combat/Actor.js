@@ -8,6 +8,11 @@ var util    = util      || null;
 Combat.Actor = (function(){
     function Actor(){
     }
+
+    /// Actor super constructor.
+    /// @constructor
+    ///
+    /// @param {Combat.Client} client The controlling client.
     Actor._super = function( client ){
         this._super( client );
         this._targetID = null;

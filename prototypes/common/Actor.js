@@ -6,7 +6,11 @@ var util    = util  || null;
 Riyda.Actor = (function(){
     function Actor(){
     }
-    
+
+    /// Actor super constructor.
+    /// @constructor
+    ///
+    /// @param {Riyda.Client} client The controlling client.
     Actor._super = function( client ){
         util.assert.instance( client, Riyda.Client );
         this._client    = client;
