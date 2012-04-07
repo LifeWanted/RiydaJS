@@ -9,4 +9,5 @@ var me;
 $(function(){
     app = new Combat.Application();
     app.init();
+    me = app.getPlayer();
 });
