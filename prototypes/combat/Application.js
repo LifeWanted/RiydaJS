@@ -6,6 +6,7 @@ var util    = util      || null;
 
 Combat.Application = (function(){
     function Application(){
+        this.setServer( new Combat.Server() );
     }
     util.instance( Riyda.Application, Application );
     var ApplicationProto = Application.prototype;

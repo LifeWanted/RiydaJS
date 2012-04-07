@@ -1,12 +1,12 @@
 
+// External variables.
+var Combat = Combat || null;
+
+// Global variables.
 var app;
-var client;
 var me;
 
 $(function(){
-    app = new Riyda.Application();
-    app.setServer( new Combat.Server() );
+    app = new Combat.Application();
     app.init();
-    client  = new Combat.Client();
-    me      = client.getPlayer();
 });
