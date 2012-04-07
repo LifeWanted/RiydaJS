@@ -5,7 +5,7 @@ var util    = util      || null;
 
 Combat.PlayerClient = (function(){
     function PlayerClient(){
-        this._player = new Combat.Player();
+        this._player = new Combat.Player( this );
     }
     util.inherit( Combat.Client, PlayerClient );
     var PlayerClientProto = PlayerClient.prototype;
