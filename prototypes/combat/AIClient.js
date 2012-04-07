@@ -10,5 +10,8 @@ Combat.AIClient = (function(){
     util.inherit( Combat.Client, AIClient );
     var AIClientProto = AIClient.prototype;
 
+    AIClientProto.messageReceived = function( message ){
+    };
+
     return AIClient;
 })();

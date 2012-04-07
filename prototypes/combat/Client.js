@@ -11,9 +11,6 @@ Combat.Client = (function(){
     }
     util.inherit( Riyda.Client, Client );
     var ClientProto = Client.prototype;
-    
-    ClientProto.messageReceived = function( message ){
-    };
 
     return Client;
 })();

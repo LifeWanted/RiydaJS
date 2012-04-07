@@ -17,5 +17,8 @@ Combat.PlayerClient = (function(){
         return this._player;
     };
 
+    PlayerClientProto.messageReceived = function( message ){
+    };
+
     return PlayerClient;
 })();
