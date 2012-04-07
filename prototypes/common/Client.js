@@ -1,5 +1,7 @@
 
-var Riyda = Riyda || {};
+// External variables.
+var Riyda   = Riyda || {};
+var util    = util  || null;
 
 /// The `Client` class should be subclassed for each specific client task.
 ///
