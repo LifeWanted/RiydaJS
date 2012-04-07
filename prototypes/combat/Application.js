@@ -10,7 +10,7 @@ Combat.Application = (function(){
     }
     util.instance( Riyda.Application, Application );
     var ApplicationProto = Application.prototype;
-    
+
     /// Initializes the application.
     ApplicationProto.init = function(){
         // Call the base initialization.
@@ -20,14 +20,22 @@ Combat.Application = (function(){
         this._playerClient  = new Combat.PlayerClient();
         this._aiClient      = new Combat.AIClient();
     };
-    
+
     /// Gets the player's interface instance.
     ///
     /// @return {Combat.Player} The player's interface.
     ApplicationProto.getPlayer = function(){
-        util.assert( this._playerClient instanceof Combat.PlayerClient );
+        util.assert.instance( this._playerClient, Combat.PlayerClient );
         return this._playerClient.getPlayer();
     };
-    
+
+    /// Gets the AI monster actor.
+    ///
+    /// @return {Combat.Monster} The monster actor.
+    ApplicationProto.getMonster = function(){
+        util.assert.instance( this._aiClient, Combat.AIClient );
+        return this._aiClient.getMonster();
+    };
+
     return Application;
 })();
