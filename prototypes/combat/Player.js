@@ -4,7 +4,7 @@ var Combat = Combat || {};
 Combat.Player = (function(){
     function Player(){
         this._super();
-        this._target = null;
+        this._targetID = null;
     }
     util.inherit( Combat.Actor, Player );
     var PlayerProto = Player.prototype;
@@ -28,6 +28,8 @@ Combat.Player = (function(){
     ///
     /// @param {string} move The name of the combat manuever to perform.
     PlayerProto.attack = function( move ){
+        util.assert( this._targetID );
+        this.perform( move, this._targetID );
     };
 
     return Player;
