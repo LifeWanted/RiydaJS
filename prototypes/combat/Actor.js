@@ -1,4 +1,8 @@
-var Combat = Combat || {};
+
+// External variables.
+var Combat  = Combat    || {};
+var Riyda   = Riyda     || null;
+var util    = util      || null;
 
 /// The actor class represents any entity that can perform actions.
 Combat.Actor = (function(){
@@ -6,6 +10,7 @@ Combat.Actor = (function(){
     }
     Actor._super = function(){
         this._super();
+        this._targetID = null;
         this._status = {
             health  : 100,
             mana    : 100,
@@ -34,6 +39,13 @@ Combat.Actor = (function(){
     /// @return {number} The `Actor`'s stamina.
     ActorProto.getStamina = function(){
         return this._status.stamina;
+    };
+
+    /// Sets the player's target to the one given.
+    ///
+    /// @param {string} targetID The ID of the `Actor` to target.
+    ActorProto.setTarget = function( targetID ){
+        this._targetID = targetID;
     };
 
     /// Performs the given `move` against the player's target.

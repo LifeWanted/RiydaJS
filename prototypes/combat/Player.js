@@ -10,7 +10,6 @@ Combat.Player = (function(){
         util.assert.instance( client, Combat.PlayerClient );
         this._super();
         this._client   = client;
-        this._targetID = null;
     }
     util.inherit( Combat.Actor, Player );
     var PlayerProto = Player.prototype;
@@ -54,13 +53,6 @@ Combat.Player = (function(){
     /// Prints a list of attacks available to the player.
     PlayerProto.getAttacks = function(){
         console.log( this.getActionNames().join("\n") );
-    };
-
-    /// Sets the player's target to the one given.
-    ///
-    /// @param {string} targetID The ID of the `Actor` to target.
-    PlayerProto.setTarget = function( targetID ){
-        this._targetID = targetID;
     };
 
     return Player;
