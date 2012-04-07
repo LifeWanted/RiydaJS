@@ -14,7 +14,8 @@ Combat.Actor = (function(){
     ///
     /// @param {Combat.Client} client The controlling client.
     Actor._super = function( client ){
-        this._super( client );
+        // TODO: Why is this._super causing an infinite loop here?
+        Riyda.Actor._super.call( this, client );
         this._targetID = null;
         this._status = {
             health  : 100,

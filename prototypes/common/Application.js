@@ -26,7 +26,7 @@ Riyda.Application = (function(){
     ///
     /// @return {Application} The singleton instance of the application.
     Application.getSingleton = function(){
-        util.assert( _instance instanceof Application );
+        util.assert.instance( _instance, Application );
         return _instance;
     };
 

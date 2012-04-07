@@ -34,7 +34,7 @@ util.assert = function( val, message ){
 util.assert.instance = function( obj, clas ){
     util.assert(
         obj instanceof clas,
-        'Not an instance of ' + util.getFunctionName( clas )
+        obj + ' is not an instance of ' + util.getFunctionName( clas )
     );
 };
 

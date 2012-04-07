@@ -6,9 +6,10 @@ var util    = util      || null;
 
 Combat.Application = (function(){
     function Application(){
+        this._super();
         this.setServer( new Combat.Server() );
     }
-    util.instance( Riyda.Application, Application );
+    util.inherit( Riyda.Application, Application );
     var ApplicationProto = Application.prototype;
 
     /// Initializes the application.
