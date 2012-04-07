@@ -1,18 +1,27 @@
-var Combat = Combat || {};
+
+// External variables.
+var Combat  = Combat    || {};
+var Riyda   = Riyda     || null;
+var util    = util      || null;
 
 /// The `Player` class is the user's interface to the Combat Prototype.
 Combat.Player = (function(){
-    function Player(){
+    function Player( client ){
+        util.assert.instance( client, Combat.PlayerClient );
         this._super();
+        this._client   = client;
         this._targetID = null;
     }
     util.inherit( Combat.Actor, Player );
     var PlayerProto = Player.prototype;
 
-
+    /// Gets the targetand engages it in combat.
     PlayerProto.start = function(){
+        var monster = Riyda.Application.getSingleton().getMonster();
+        this.setTarget( monster.getID() );
     };
-    
+
+    /// Prints help information.
     PlayerProto.help = function(){
         console.log(
             "This is a prototype of the Riyda combat system. As the player you perform all "    +
@@ -26,6 +35,10 @@ Combat.Player = (function(){
         );
     };
 
+    /// Prints the status effects active on the player.
+    PlayerProto.ailments = function(){
+    };
+
     /// Prints the current status of the player.
     PlayerProto.status = function(){
         console.log(
@@ -33,10 +46,10 @@ Combat.Player = (function(){
             "MP: " + this.getMana()     + "\n"  +
             "SP: " + this.getStamina()  + "\n"  +
             "\n"                                +
-            this.ailments()
         );
+        this.ailments()
     };
-    
+
     /// Prints a list of attacks available to the player.
     PlayerProto.getAttacks = function(){
         console.log( this.getActionNames().join("\n") );
