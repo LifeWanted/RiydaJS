@@ -22,6 +22,7 @@ Combat.Player = (function(){
     
     /// Prints a list of attacks available to the player.
     PlayerProto.getAttacks = function(){
+        console.log( this.getActionNames().join("\n") );
     };
 
     /// Performs the given `move` against the player's target.
@@ -30,6 +31,13 @@ Combat.Player = (function(){
     PlayerProto.attack = function( move ){
         util.assert( this._targetID );
         this.perform( move, this._targetID );
+    };
+
+    /// Sets the player's target to the one given.
+    ///
+    /// @param {string} targetID The ID of the `Actor` to target.
+    PlayerProto.setTarget = function( targetID ){
+        this._targetID = targetID;
     };
 
     return Player;
