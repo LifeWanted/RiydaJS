@@ -11,11 +11,22 @@ Combat.Application = (function(){
     util.instance( Riyda.Application, Application );
     var ApplicationProto = Application.prototype;
     
+    /// Initializes the application.
     ApplicationProto.init = function(){
+        // Call the base initialization.
         Riyda.Application.prototype.init.call( this );
-        
+
+        // Create our clients.
         this._playerClient  = new Combat.PlayerClient();
         this._aiClient      = new Combat.AIClient();
+    };
+    
+    /// Gets the player's interface instance.
+    ///
+    /// @return {Combat.Player} The player's interface.
+    ApplicationProto.getPlayer = function(){
+        util.assert( this._playerClient instanceof Combat.PlayerClient );
+        return this._playerClient.getPlayer();
     };
     
     return Application;
