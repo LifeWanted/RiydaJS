@@ -36,5 +36,13 @@ Combat.Actor = (function(){
         return this._status.stamina;
     };
 
+    /// Performs the given `move` against the player's target.
+    ///
+    /// @param {string} move The name of the combat manuever to perform.
+    ActorProto.attack = function( move ){
+        util.assert( this._targetID );
+        this.perform( move, this._targetID );
+    };
+
     return Actor;
 })();
