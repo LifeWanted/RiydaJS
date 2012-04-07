@@ -19,6 +19,7 @@ Combat.Player = (function(){
     PlayerProto.start = function(){
         var monster = Riyda.Application.getSingleton().getMonster();
         this.setTarget( monster.getID() );
+        console.log("Make an attack to begin combat.");
     };
 
     /// Prints help information.
