@@ -45,9 +45,9 @@ Combat.Player = (function(){
             "HP: " + this.getHealth()   + "\n"  +
             "MP: " + this.getMana()     + "\n"  +
             "SP: " + this.getStamina()  + "\n"  +
-            "\n"                                +
+            "\n"
         );
-        this.ailments()
+        this.ailments();
     };
 
     /// Prints a list of attacks available to the player.
