@@ -1,4 +1,8 @@
-var Combat = Combat || {};
+
+// External variables.
+var Combat  = Combat    || {};
+var Riyda   = Riyda     || null;
+var util    = util      || null;
 
 Combat.Client = (function(){
     function Client(){
