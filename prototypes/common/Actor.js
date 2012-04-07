@@ -1,10 +1,15 @@
-var Riyda = Riyda || {};
+
+// External variables.
+var Riyda   = Riyda || {};
+var util    = util  || null;
 
 Riyda.Actor = (function(){
     function Actor(){
     }
     
-    Actor._super = function(){
+    Actor._super = function( client ){
+        util.assert.instance( client, Riyda.Client );
+        this._client    = client;
         this._id        = util.generateID();
         this._actions   = {};
         Riyda.Application.getSingleton().addActor( this );
@@ -20,9 +25,9 @@ Riyda.Actor = (function(){
 
     /// Adds a new action to the `Actor`'s repitiore.
     ///
-    /// @param {Combat.Action} action The action to add.
+    /// @param {Riyda.Action} action The action to add.
     ActorProto.addAction = function( action ){
-        util.assert( action instanceof Combat.Action );
+        util.assert( action instanceof Riyda.Action );
         this._actions[ action.getName() ] = action;
     };
 
@@ -37,9 +42,9 @@ Riyda.Actor = (function(){
     ///
     /// @param {string} actionName The name of the action to retrieve.
     ///
-    /// @return {Combat.Action} The named action.
+    /// @return {Riyda.Action} The named action.
     ActorProto.getAction = function( actionName ){
-        util.assert( this._actions[actionName] instanceof Combat.Action );
+        util.assert( this._actions[actionName] instanceof Riyda.Action );
         return this._actions[actionName];
     };
 

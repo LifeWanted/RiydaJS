@@ -8,8 +8,8 @@ var util    = util      || null;
 Combat.Actor = (function(){
     function Actor(){
     }
-    Actor._super = function(){
-        this._super();
+    Actor._super = function( client ){
+        this._super( client );
         this._targetID = null;
         this._status = {
             health  : 100,

@@ -7,9 +7,7 @@ var util    = util      || null;
 /// The `Player` class is the user's interface to the Combat Prototype.
 Combat.Player = (function(){
     function Player( client ){
-        util.assert.instance( client, Combat.PlayerClient );
-        this._super();
-        this._client   = client;
+        this._super( client );
     }
     util.inherit( Combat.Actor, Player );
     var PlayerProto = Player.prototype;
