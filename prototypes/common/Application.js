@@ -6,17 +6,18 @@ var util  = util  || null;
 Riyda.Application = (function(){
     var _instance = null;
 
+    function Application(){
+    }
+
     /// Constructor for `Application`
     /// @constructor
     ///
     /// @throws {Error} If an instance already exists.
-    function Application(){
-    }
     Application._super = function(){
         util.assert( _instance === null );
         _instance = this;
         this._actors = {};
-    }
+    };
     var ApplicationProto = Application.prototype;
 
     /// Retrieves the singleton instance of the `Application`.
