@@ -8,7 +8,24 @@ Combat.Player = (function(){
     }
     util.inherit( Combat.Actor, Player );
     var PlayerProto = Player.prototype;
+
+
+    PlayerProto.start = function(){
+    };
     
+    PlayerProto.help = function(){
+        console.log(
+            "This is a prototype of the Riyda combat system. As the player you perform all "    +
+            "your actions through the global `me` object. This object has the following "       +
+            "controls:\n"                                                                       +
+            "  me.ailments()        : Lists the active status effects.\n"                       +
+            "  me.status()          : Lists the player's health and status effects.\n"          +
+            "  me.getAttacks()      : Lists the moves the player can use to attack.\n"          +
+            "  me.attack( move )    : Performs the named attack.\n"   +
+            "\n"
+        );
+    };
+
     /// Prints the current status of the player.
     PlayerProto.status = function(){
         console.log(
@@ -23,14 +40,6 @@ Combat.Player = (function(){
     /// Prints a list of attacks available to the player.
     PlayerProto.getAttacks = function(){
         console.log( this.getActionNames().join("\n") );
-    };
-
-    /// Performs the given `move` against the player's target.
-    ///
-    /// @param {string} move The name of the combat manuever to perform.
-    PlayerProto.attack = function( move ){
-        util.assert( this._targetID );
-        this.perform( move, this._targetID );
     };
 
     /// Sets the player's target to the one given.
