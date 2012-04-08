@@ -12,6 +12,17 @@ util.abstract = function( methodName ){
     };
 };
 
+/// Creates an accessor method.
+///
+/// @param {Object} proto   The prototype to add the accessor method to.
+/// @param {string} method  The name of the accessor method.
+/// @param {string} member  The name of the member to access.
+util.accessor = function( proto, method, member ){
+    proto[method] = function(){
+        return this[member];
+    };
+};
+
 /// Asserts that the given value is true.
 ///
 /// @throws {Error} If `val` is not true.
