@@ -82,6 +82,21 @@ util.getFunctionName = function( func ){
     return func.toString().match( /^function (\w*)/ )[1] || "<anonymous>";
 };
 
+/// Retrieves all the keys of the object `obj`.
+///
+/// @param {Object.<string,*>} obj The object to retrieve the keys of.
+///
+/// @return {Array.<string>} An array containing all the keys read from the object.
+util.getKeys = function( obj ){
+    var keys = [];
+    for( var i in obj ){
+        if( obj.hasOwnProperty( i ) ){
+            keys.push( i );
+        }
+    }
+    return keys;
+};
+
 /// Sets up `derived` to inherit from `base`.
 ///
 /// @param {function}   base    The base class constructor.
@@ -89,6 +104,9 @@ util.getFunctionName = function( func ){
 ///
 /// @return {function} The new class that inherits from `base` and `derived`.
 util.inherit = function( base, derived ){
+    util.assert.isFunction( base );
+    util.assert.isFunction( derived );
+    
     // Prepare our prototypes.
     var supr  = base.prototype;
     var derv  = derived.prototype;
@@ -142,6 +160,7 @@ util.inherit = function( base, derived ){
 ///
 /// @return {function} The new class that is compatible with `util.inherit`.
 util.inherit.base = function( base ){
+    util.assert.isFunction( base );
     var clas = function(){
         if( !clas.__initializing__ ){
             base._init.apply( this, arguments );
