@@ -4,8 +4,9 @@ var Riyda   = Riyda || {};
 var util    = util  || null;
 
 Riyda.Message = (function(){
-    function Message(){
-    }
+    function Message(){}
+    Message._init = function(){
+    };
     var MessageProto = Message.prototype;
 
     /// Abstract method for getting the type of a message.
