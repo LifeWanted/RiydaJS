@@ -153,14 +153,16 @@ util.inherit = function( base, derived ){
             return result;
         };
     };
+    var callsSuper = /\b_super\b/;
 
     // Any overridden functions get a special wrapper.
     for( var name in derv ){
-        if( util.isFunction( derv[name], supr[name] ) ){
+        var dervFunc = derv[name];
+        if( util.isFunction( dervFunc, supr[name] ) && callsSuper.test( dervFunc ) ){
             proto[name] = superCaller( name );
         }
         else {
-            proto[name] = derv[name];
+            proto[name] = dervFunc;
         }
     }
 
