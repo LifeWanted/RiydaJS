@@ -44,7 +44,7 @@ util.assert.instance = function( obj, clas ){
 ///
 /// @param {*} func The object to test.
 util.assert.isFunction = function( func ){
-    util.assert( func instanceof Function, 'Not a function' );
+    util.assert( util.isFunction( func ), func + ' is not a function' );
 };
 
 /// Generates a new random ID.
@@ -71,15 +71,46 @@ util.getFunctionName = function( func ){
 /// @param {function}   base    The base class constructor.
 /// @param {function}   derived The derived class constructor.
 util.inherit = function( base, derived ){
-    derived.prototype = new base();
-    derived.prototype.constructor = derived;
-    derived.prototype._super = function(){
-        if( base._super instanceof Function ){
-            base._super.apply( this, arguments );
+    // Prepare our prototypes.
+    var supr  = base.prototype;
+    var derv  = derived.prototype;
+    var proto = new base();
+
+    // A utility function to handle setting the super function.
+    var superCaller = function( name ){
+        return function(){
+            var oldSuper    = this._super;
+            this._super     = supr[name];
+            var result      = derv[name].apply( this, arguments );
+            this._super     = oldSuper;
+            return result;
+        };
+    };
+
+    // Any overridden functions get a special wrapper.
+    for( var name in derv ){
+        if( util.isFunction( derv[name], supr[name] ) ){
+            proto[name] = superCaller( name );
         }
         else {
-            base.apply( this, arguments );
+            proto[name] = derv[name];
         }
-    };
+    }
+
+    // Finally set the derived class' prototype.
+    proto._super        = base;
+    proto.constructor   = derived;
+    derived.prototype   = proto;
 };
 
+/// Detects if all of the parameters are functions.
+///
+/// @return {boolean} True if every parameter is a function.
+util.isFunction = function(){
+    for( var i in arguments ){
+        if( !(arguments[i] instanceof Function) ){
+            return false;
+        }
+    }
+    return true;
+};
