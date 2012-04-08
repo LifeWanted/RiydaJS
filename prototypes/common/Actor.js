@@ -56,10 +56,7 @@ Riyda.Actor = (function(){
     ///
     /// @param {string} actionName  The name of the action to perform.
     /// @param {string} targetID    The ID of the target of the action.
-    ActorProto.perform = function( actionName, targetID ){
-        var action = this.getAction( actionName );
-        var target = Riyda.Application.getSingleton().getActor( targetID );
-    };
+    ActorProto.perform = util.abstract( 'Riyda.Actor.perform' );
 
     return util.inherit.base( Actor );
 })();
