@@ -38,6 +38,15 @@ util.assert.instance = function( obj, clas ){
     );
 };
 
+/// Asserts that `arr` is an array.
+///
+/// @throws {Error} If `arr` is not an array.
+///
+/// @param {*} arr The object to test.
+util.assert.isArray = function( arr ){
+    util.assert( util.isArray( arr ), arr + ' is not an array' );
+};
+
 /// Asserts that `func` is a function.
 ///
 /// @throws {Error} If `func` is not a function.
@@ -173,6 +182,18 @@ util.inherit.base = function( base ){
     return clas;
 };
 
+/// Detects if all the parameters are arrays.
+///
+/// @areturn {boolean} True if every parameter is an array.
+util.isArray = function(){
+    for( var i in arguments ){
+        if( !(arguments[i] instanceof Array) ){
+            return false;
+        }
+    }
+    return true;
+};
+
 /// Detects if all of the parameters are functions.
 ///
 /// @return {boolean} True if every parameter is a function.
@@ -183,4 +204,35 @@ util.isFunction = function(){
         }
     }
     return true;
+};
+
+/// Creates an enumeration object from the given values.
+///
+/// @param {Array.<string>} names An array of the enumeration names.
+///
+/// @return {Object.<string,string>} An enumeration object.
+util.makeEnum = function( names ){
+    util.assert.isArray( names );
+    var enm = {};
+    for( var i = 0; i < names.length; ++i ){
+        enm[names[i]] = names[i];
+    }
+    return enm;
+};
+
+/// Creates a mapping of names to bit flags.
+///
+/// @param {Array.<stirng>} names An array of flag names.
+///
+/// @return {Object.<string,number>} A mapping of flag names to bit flag values.
+util.makeFlags = function( names ){
+    util.assert.isArray( names );
+    util.assert( names.length < 64, 'Too many flags' );
+    var flags = {
+        None : 0
+    };
+    for( var i = 0; i < names.length; ++i ){
+        flags[names[i]] = 1 << i;
+    }
+    return flags;
 };
