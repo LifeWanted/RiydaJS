@@ -1,4 +1,8 @@
 
+// External variables.
+var Riyda   = Riyda || null;
+var util    = util  || null;
+
 function log( message ){
     console.log( (new Date()) + ': ' + message.message );
 }
@@ -6,10 +10,11 @@ function log( message ){
 var Demo = {};
 Demo.Client = (function(){
     function Client(){
+    }
+    Client._init = function(){
         this._super();
         this.getConnector().setLatency( 500 );
-    }
-    util.inherit( Riyda.Client, Client );
+    };
     var ClientProto = Client.prototype;
     
     ClientProto.messageReceived = function( message ){
@@ -27,22 +32,23 @@ Demo.Client = (function(){
         this._stop = true;
     };
     
-    return Client;
+    return util.inherit( Riyda.Client, Client );
 })();
 
 Demo.Server = (function(){
     function Server(){
+    }
+    Server._init = function(){
         this._super();
     };
-    util.inherit( Riyda.Server, Server );
     var ServerProto = Server.prototype;
 
     ServerProto.messageReceived = function( message ){
         log( message );
         this.send( message.originatorID, { 'message' : 'Pong' } );
-    }
+    };
     
-    return Server;
+    return util.inherit( Riyda.Server, Server );
 })();
 
 // Set up the application.

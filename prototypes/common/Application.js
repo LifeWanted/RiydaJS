@@ -13,7 +13,7 @@ Riyda.Application = (function(){
     /// @constructor
     ///
     /// @throws {Error} If an instance already exists.
-    Application._super = function(){
+    Application._init = function(){
         util.assert( _instance === null );
         _instance = this;
         this._actors = {};
@@ -70,5 +70,5 @@ Riyda.Application = (function(){
         return this._actors[actorID];
     };
 
-    return Application;
+    return util.inherit.base( Application );
 })();

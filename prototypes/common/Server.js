@@ -1,5 +1,7 @@
 
-var Riyda = Riyda || {};
+// External variables.
+var Riyda   = Riyda || {};
+var util    = util  || null;
 
 /// The `Server` class should be subclassed 
 Riyda.Server = (function(){
@@ -8,7 +10,7 @@ Riyda.Server = (function(){
 
     /// Server constructor.
     /// @constructor
-    Server._super = function(){
+    Server._init = function(){
         this._connections = {};
         this._id = util.generateID();
     };
@@ -55,6 +57,6 @@ Riyda.Server = (function(){
         }
     };
 
-    return Server;
+    return util.inherit.base( Server );
 })();
 

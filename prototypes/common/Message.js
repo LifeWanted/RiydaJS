@@ -11,5 +11,5 @@ Riyda.Message = (function(){
     /// Abstract method for getting the type of a message.
     MessageProto.getType = util.abstract( "Message.getType" );
 
-    return Message;
+    return util.inherit.base( Message );
 })();

@@ -11,7 +11,7 @@ Riyda.Actor = (function(){
     /// @constructor
     ///
     /// @param {Riyda.Client} client The controlling client.
-    Actor._super = function( client ){
+    Actor._init = function( client ){
         util.assert.instance( client, Riyda.Client );
         this._client    = client;
         this._id        = util.generateID();
@@ -61,6 +61,6 @@ Riyda.Actor = (function(){
         var target = Riyda.Application.getSingleton().getActor( targetID );
     };
 
-    return Actor;
+    return util.inherit.base( Actor );
 })();
 

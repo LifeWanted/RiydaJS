@@ -47,6 +47,22 @@ util.assert.isFunction = function( func ){
     util.assert( util.isFunction( func ), func + ' is not a function' );
 };
 
+/// Copies the direct properties of `src` to `dest`.
+///
+/// @param {Object}     src     The object to copy from.
+/// @param {Object?}    dest    The object to copy to. Default is a new object.
+///
+/// @return {Object} The destination object.
+util.copy = function( src, dest ){
+    dest = dest || {};
+    for( var i in src ){
+        if( src.hasOwnProperty( i ) ){
+            dest[i] = src[i];
+        }
+    }
+    return dest;
+};
+
 /// Generates a new random ID.
 ///
 /// @return {string} The new ID string.
@@ -74,7 +90,9 @@ util.inherit = function( base, derived ){
     // Prepare our prototypes.
     var supr  = base.prototype;
     var derv  = derived.prototype;
+    base.__initializing__ = true;
     var proto = new base();
+    base.__initializing__ = false;
 
     // A utility function to handle setting the super function.
     var superCaller = function( name ){
@@ -98,9 +116,36 @@ util.inherit = function( base, derived ){
     }
 
     // Finally set the derived class' prototype.
-    proto._super        = base;
     proto.constructor   = derived;
     derived.prototype   = proto;
+
+    var clas = function(){
+        if( !clas.__initializing__ ){
+            var oldSuper    = this._super;
+            this._super     = base._init;
+            derived._init.apply( this, arguments );
+            this._super     = oldSuper;
+        }
+    };
+    derived.__initializing__ = true;
+    clas.prototype  = new derived();
+    derived.__initializing__ = false;
+    util.copy( derived, clas );
+    return clas;
+};
+
+/// 
+util.inherit.base = function( base ){
+    var clas = function(){
+        if( !clas.__initializing__ ){
+            base._init.apply( this, arguments );
+        }
+    };
+    base.__initializing__ = true;
+    clas.prototype  = new base();
+    base.__initializing__ = false;
+    util.copy( base, clas );
+    return clas;
 };
 
 /// Detects if all of the parameters are functions.
