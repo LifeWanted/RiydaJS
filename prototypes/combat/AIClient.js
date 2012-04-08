@@ -9,9 +9,8 @@ Combat.AIClient = (function(){
     }
     AIClient._init = function(){
         this._monster   = new Combat.Monster( this );
-        this._handlers  = {
-//            Combat.Message.Type.NextTurn : _nextTurn
-        };
+        this._handlers  = {};
+        this._handlers[Combat.Message.Type.NextTurn] = _nextTurn;
     };
     var AIClientProto = AIClient.prototype;
 
