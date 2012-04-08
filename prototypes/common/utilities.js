@@ -67,6 +67,15 @@ util.assert.isFunction = function( func ){
     util.assert( util.isFunction( func ), func + ' is not a function' );
 };
 
+/// Asserts that `str` is a string.
+///
+/// @throws {Error} If `str` is not a string.
+///
+/// @param {*} str The object to test.
+util.assert.isString = function( str ){
+    util.assert( util.isString( str ), str + ' is not a string' );
+};
+
 /// Copies the direct properties of `src` to `dest`.
 ///
 /// @param {Object}     src     The object to copy from.
@@ -211,6 +220,18 @@ util.isArray = function(){
 util.isFunction = function(){
     for( var i in arguments ){
         if( !(arguments[i] instanceof Function) ){
+            return false;
+        }
+    }
+    return true;
+};
+
+/// Detects if all of the parameters are strings.
+///
+/// @return {boolean} True if every parameter is a string.
+util.isString = function(){
+    for( var i in arguments ){
+        if( !(arguments[i] instanceof String) ){
             return false;
         }
     }
