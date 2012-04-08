@@ -1,14 +1,19 @@
-var Combat = Combat || {};
+
+// External variables.
+var Combat  = Combat    || {};
+var Riyda   = Riyda     || null;
+var util    = util      || null;
 
 Combat.Server = (function(){
     function Server(){
-        this._super();
     }
-    util.inherit( Riyda.Server, Server );
+    Server._init = function(){
+        this._super();
+    };
     var ServerProto = Server.prototype;
 
     ServerProto.messageReceived = function( message ){
     };
 
-    return Server;
+    return util.inherit( Riyda.Server, Server );
 })();

@@ -6,12 +6,13 @@ var util    = util      || null;
 
 Combat.AIClient = (function(){
     function AIClient(){
+    }
+    AIClient._init = function(){
         this._monster   = new Combat.Monster( this );
         this._handlers  = {
-            Combat.Message.Type.NextTurn : _nextTurn
+//            Combat.Message.Type.NextTurn : _nextTurn
         };
-    }
-    util.inherit( Combat.Client, AIClient );
+    };
     var AIClientProto = AIClient.prototype;
 
     /// Handles a new turn starting.
@@ -29,5 +30,5 @@ Combat.AIClient = (function(){
         this._handlers[ message.getType() ].call( this, message );
     };
 
-    return AIClient;
+    return util.inherit( Combat.Client, AIClient );
 })();

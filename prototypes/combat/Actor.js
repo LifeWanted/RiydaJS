@@ -13,9 +13,8 @@ Combat.Actor = (function(){
     /// @constructor
     ///
     /// @param {Combat.Client} client The controlling client.
-    Actor._super = function( client ){
-        // TODO: Why is this._super causing an infinite loop here?
-        Riyda.Actor._super.call( this, client );
+    Actor._init = function( client ){
+        this._super( client );
         this._targetID = null;
         this._status = {
             health  : 100,
@@ -23,7 +22,6 @@ Combat.Actor = (function(){
             stamina : 100
         };
     };
-    util.inherit( Riyda.Actor, Actor );
     var ActorProto = Actor.prototype;
 
     /// Retrieves the health of the `Actor`.
@@ -62,5 +60,5 @@ Combat.Actor = (function(){
         this.perform( move, this._targetID );
     };
 
-    return Actor;
+    return util.inherit( Riyda.Actor, Actor );
 })();

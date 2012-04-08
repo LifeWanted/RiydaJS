@@ -5,9 +5,11 @@ var util    = util      || null;
 
 Combat.PlayerClient = (function(){
     function PlayerClient(){
-        this._player = new Combat.Player( this );
     }
-    util.inherit( Combat.Client, PlayerClient );
+    PlayerClient._init = function(){
+        this._super();
+        this._player = new Combat.Player( this );
+    };
     var PlayerClientProto = PlayerClient.prototype;
 
     /// Fetches the player associated with this client.
@@ -20,5 +22,5 @@ Combat.PlayerClient = (function(){
     PlayerClientProto.messageReceived = function( message ){
     };
 
-    return PlayerClient;
+    return util.inherit( Combat.Client, PlayerClient );
 })();

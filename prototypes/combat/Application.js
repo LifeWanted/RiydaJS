@@ -6,10 +6,11 @@ var util    = util      || null;
 
 Combat.Application = (function(){
     function Application(){
+    }
+    Application._init = function(){
         this._super();
         this.setServer( new Combat.Server() );
-    }
-    util.inherit( Riyda.Application, Application );
+    };
     var ApplicationProto = Application.prototype;
 
     /// Initializes the application.
@@ -38,5 +39,5 @@ Combat.Application = (function(){
         return this._aiClient.getMonster();
     };
 
-    return Application;
+    return util.inherit( Riyda.Application, Application );
 })();

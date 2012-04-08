@@ -10,11 +10,12 @@ Combat.Player = (function(){
     /// @constructor
     ///
     /// @param {Combat.PlayerClient} client The controlling client.
-    function Player( client ){
+    function Player(){
+    }
+    Player._init = function( client ){
         util.assert.instance( client, Combat.PlayerClient );
         this._super( client );
-    }
-    util.inherit( Combat.Actor, Player );
+    };
     var PlayerProto = Player.prototype;
 
     /// Gets the targetand engages it in combat.
@@ -58,5 +59,5 @@ Combat.Player = (function(){
         console.log( this.getActionNames().join("\n") );
     };
 
-    return Player;
+    return util.inherit( Combat.Actor, Player );
 })();
