@@ -57,7 +57,9 @@ Combat.Actor = (function(){
     /// @param {string} move The name of the combat manuever to perform.
     ActorProto.attack = function( move ){
         util.assert( this._targetID );
-        this.perform( move, this._targetID );
+        var action = new this.getAction( move );
+        action.setTarget( this._targetID );
+        this.perform( action );
     };
 
     /// Performs the given action.
