@@ -79,7 +79,7 @@ util.generateID = function(){
 /// @return {string} The name of the provided function.
 util.getFunctionName = function( func ){
     util.assert.isFunction( func );
-    return func.toString().match( /^function (\w+)/ )[1];
+    return func.toString().match( /^function (\w*)/ )[1] || "<anonymous>";
 };
 
 /// Sets up `derived` to inherit from `base`.
@@ -124,7 +124,7 @@ util.inherit = function( base, derived ){
     var clas = function(){
         if( !clas.__initializing__ ){
             var oldSuper    = this._super;
-            this._super     = base._init;
+            this._super     = base;
             derived._init.apply( this, arguments );
             this._super     = oldSuper;
         }
