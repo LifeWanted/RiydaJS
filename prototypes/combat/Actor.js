@@ -60,13 +60,14 @@ Combat.Actor = (function(){
         this.perform( move, this._targetID );
     };
 
-    /// Performs the named action against the specified target.
+    /// Performs the given action.
     ///
-    /// @param {string} actionName  The name of the action to perform.
-    /// @param {string} targetID    The ID of the target of the action.
-    ActorProto.perform = function( actionName, targetID ){
-        var action = this.getAction( actionName );
-        var target = Riyda.Application.getSingleton().getActor( targetID );
+    /// @param {Combat.Action} action The action to perform.
+    ActorProto.perform = function( action ){
+        util.assert.instance( action, Combat.Action );
+        util.assert( this.canPerform( action.getName() ) );
+        var message = new Combat.Message.PerformAction( this.getID(), action );
+        this.getClient().send( message );
     };
 
     return util.inherit( Riyda.Actor, Actor );
