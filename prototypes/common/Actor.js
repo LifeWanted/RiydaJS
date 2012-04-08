@@ -55,14 +55,16 @@ Riyda.Actor = (function(){
         return this._actions[actionName];
     };
 
+    /// Detects if the named action is known to this `Actor`.
+    ///
+    /// @param {string} actionName The name of the action to check.
+    ///
+    /// @return {boolean} True if the named action is performable by this `Actor`.
     ActorProto.canPerform = function( actionName ){
         return this._actions[actionName] instanceof Riyda.Action;
     };
 
-    /// Performs the named action against the specified target.
-    ///
-    /// @param {string} actionName  The name of the action to perform.
-    /// @param {string} targetID    The ID of the target of the action.
+    /// Performs an `Action`.
     ActorProto.perform = util.abstract( 'Riyda.Actor.perform' );
 
     return util.inherit.base( Actor );
