@@ -86,6 +86,8 @@ util.getFunctionName = function( func ){
 ///
 /// @param {function}   base    The base class constructor.
 /// @param {function}   derived The derived class constructor.
+///
+/// @return {function} The new class that inherits from `base` and `derived`.
 util.inherit = function( base, derived ){
     // Prepare our prototypes.
     var supr  = base.prototype;
@@ -134,7 +136,11 @@ util.inherit = function( base, derived ){
     return clas;
 };
 
-/// 
+/// Turns the provided `base` class into an inheritable clas compatible with `util.inherit`.
+///
+/// @param {function} base The constructor for the base class.
+///
+/// @return {function} The new class that is compatible with `util.inherit`.
 util.inherit.base = function( base ){
     var clas = function(){
         if( !clas.__initializing__ ){
