@@ -23,9 +23,12 @@ Riyda.Actor = (function(){
     /// Retrieves the ID of the `Actor`.
     ///
     /// @return {string} The `Actor`'s ID.
-    ActorProto.getID = function(){
-        return this._id;
-    };
+    util.accessor( ActorProto, 'getID', '_id' );
+
+    /// Retrieves the `Client` this `Actor` is part of.
+    ///
+    /// @return {Riyda.Client} The `Actor`'s controlling `Client`.
+    util.accessor( ActorProto, 'getClient', '_client' );
 
     /// Adds a new action to the `Actor`'s repitiore.
     ///
@@ -48,8 +51,12 @@ Riyda.Actor = (function(){
     ///
     /// @return {Riyda.Action} The named action.
     ActorProto.getAction = function( actionName ){
-        util.assert( this._actions[actionName] instanceof Riyda.Action );
+        util.assert( this.canPerform( actionName ), 'Can not perform "' + actionName + '"' );
         return this._actions[actionName];
+    };
+
+    ActorProto.canPerform = function( actionName ){
+        return this._actions[actionName] instanceof Riyda.Action;
     };
 
     /// Performs the named action against the specified target.
