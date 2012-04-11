@@ -36,6 +36,19 @@ util.assert = function( val, message ){
     }
 };
 
+/// Asserts that `constr` is a constructor for the class `clas` or any subclass of `clas`.
+///
+/// @throws {Error} If `constr` is not a constructor for `clas`.
+///
+/// @param {*}          constr  The constructor to test.
+/// @param {function}   clas    The class to check for.
+util.assert.builds = function( constr, clas ){
+    util.assert(
+        constr.prototype instanceof clas,
+        constr + ' is not a constructor for ' + util.getFunctionName( clas )
+    );
+};
+
 /// Asserts that `obj` is an instance of the class `clas`.
 ///
 /// @throws {Error} If `obj` is not an instance of `clas`.
