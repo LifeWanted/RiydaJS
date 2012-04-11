@@ -19,7 +19,8 @@ Combat.Message = (function(){
 
     Message.Type = util.makeEnum([
         'PerformAction',
-        'ActionResolved'
+        'ActionResolved',
+        'ActorStatusUpdate'
     ]);
 
     MessageProto.getType = function(){
@@ -57,4 +58,38 @@ Combat.Message.PerformAction = (function(){
     util.accessor( PerformActionProto, 'getAction', '_action' );
 
     return util.inherit( Combat.Message, PerformAction );
+})();
+
+/// This message is a response to the `PerformAction` message.
+///
+/// It informes the originating client that their `Action` has been fully resolved. It does not
+/// inform them of the results of the `Action`. That will come in a separate `ActorStatusUpdate`
+/// message sent to all affected parties.
+Combat.Message.ActionResolved = (function(){
+    function ActionResolved(){}
+
+    /// @constructor
+    ///
+    /// @param {string}         actorID The ID of the actor whose action was resolved.
+    /// @param {Combat.Action}  action  The action that was resolved.
+    ActionResolved._init = function( actorID, action ){
+        this.assert( actorID );
+        this.assert.instance( action, Combat.Action );
+        this._super( Combat.Message.Type.ActionResolved );
+        this._actorID   = actorID;
+        this._action    = action;
+    };
+    var ActionResolvedProto = ActionResolved.prototype;
+
+    /// Retrieves the actor ID associated with this message.
+    ///
+    /// @return {string} The ID of the actor performing the action.
+    util.accessor( ActionResolvedProto, 'getActorID', '_actorID' );
+
+    /// Retrieves the action associated with this message.
+    ///
+    /// @return {Combat.Action} The action to be performed.
+    util.accessor( ActionResolvedProto, 'getAction', '_action' );
+
+    return util.inherit( Combat.Message, ActionResolved );
 })();
