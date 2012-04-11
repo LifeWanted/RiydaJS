@@ -32,10 +32,11 @@ Riyda.Actor = (function(){
 
     /// Adds a new action to the `Actor`'s repitiore.
     ///
-    /// @param {Riyda.Action} action The action to add.
+    /// @param {function} action The constructor for the new action.
     ActorProto.addAction = function( action ){
-        util.assert( action instanceof Riyda.Action );
-        this._actions[ action.getName() ] = action;
+        util.assert.builds( action, Riyda.Action );
+        util.assert.isString( action.Name );
+        this._actions[ action.Name ] = action;
     };
 
     /// Fetches the names of all the actions available to this `Actor`.

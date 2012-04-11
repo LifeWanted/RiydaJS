@@ -9,7 +9,7 @@ Combat.Monster = (function(){
     Monster._init = function( client ){
         util.assert.instance( client, Combat.AIClient );
         this._super( client );
-        this.addAction( new Combat.Action.Bite() );
+        this.addAction( Combat.Action.Bite );
     };
 
     return util.inherit( Combat.Actor, Monster );

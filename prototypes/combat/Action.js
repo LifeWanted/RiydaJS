@@ -25,9 +25,11 @@ Combat.Action = (function(){
 Combat.Action.Bite = (function(){
     function Bite(){}
 
+    Bite.Name = 'bite';
+
     /// @constructor
     Bite._init = function(){
-        this._super( 'bite' );
+        this._super( Bite.Name );
     };
 
     return util.inherit( Combat.Action, Bite );
