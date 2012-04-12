@@ -80,6 +80,14 @@ util.assert.isFunction = function( func ){
     util.assert( util.isFunction( func ), func + ' is not a function' );
 };
 
+util.assert.isNumber = function( num ){
+    util.assert( util.isNumber( num ), num + ' is not a number' );
+};
+
+util.assert.isNumeric = function( num ){
+    util.assert( util.isNumeric( num ), num + ' is not numeric' );
+};
+
 /// Asserts that `str` is a string.
 ///
 /// @throws {Error} If `str` is not a string.
@@ -235,6 +243,36 @@ util.isArray = function(){
 util.isFunction = function(){
     for( var i in arguments ){
         if( !(arguments[i] instanceof Function) ){
+            return false;
+        }
+    }
+    return true;
+};
+
+/// Detects if all of the parameters are numbers.
+///
+/// Note that this is only true for numbers. If you simply want to know if an object can be
+/// converted to a number use `util.isNumeric` instead.
+///
+/// @return {boolean} True if every parameter is a number.
+util.isNumber = function(){
+    for( var i in arguments ){
+        if( !(arguments[i] instanceof Number) ){
+            return false;
+        }
+    }
+    return true;
+};
+
+/// Detects if all of the parameters are numeric.
+///
+/// Note that this only detects if an object can be accurately converted to a number. If you need to
+/// know if an object actually is a number use `util.isNumber` instead.
+///
+/// @return {boolean} True if every parameter is a number.
+util.isNumeric = function(){
+    for( var i in arguments ){
+        if( isNaN( arguments[i] ) ){
             return false;
         }
     }
