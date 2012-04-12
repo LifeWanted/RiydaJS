@@ -42,6 +42,11 @@ Combat.Server = (function(){
 
     /// Handles new messages coming in.
     ServerProto.messageReceived = function( message ){
+        util.assert.instance( message, Combat.Message );
+        util.assert(
+            this._handlers[message.getType()],
+            'No handler for message ' + message.getType()
+        );
         this._handlers[message.getType()].call( this, message );
     };
 
