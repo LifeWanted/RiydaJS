@@ -83,7 +83,7 @@ Combat.Message.ActionResolved = (function(){
 
     /// Retrieves the actor ID associated with this message.
     ///
-    /// @return {string} The ID of the actor performing the action.
+    /// @return {string} The ID of the actor who performed the action.
     util.accessor( ActionResolvedProto, 'getActorID', '_actorID' );
 
     /// Retrieves the action associated with this message.
@@ -92,4 +92,37 @@ Combat.Message.ActionResolved = (function(){
     util.accessor( ActionResolvedProto, 'getAction', '_action' );
 
     return util.inherit( Combat.Message, ActionResolved );
+})();
+
+/// This message signals a change to actor statuses.
+///
+/// It is triggered after an action has been resolved that results in changes to an actor's status.
+/// It is sent to all clients connected to the server.
+Combat.Message.ActorStatusUpdate = (function(){
+    function ActorStatusUpdate(){}
+
+    /// @constructor
+    ///
+    /// @param {string}             actorID         The ID of the actor being updated.
+    /// @param {Object.<string,*>   statusUpdate    A map of statuses to their new values.
+    ActorStatusUpdate._init = function( actorID, statusUpdate ){
+        util.assert( actorID );
+        util.assert( statusUpdate );
+        this._super( Combat.Message.Type.ActorStatusUpdate );
+        this._actorID       = actorID;
+        this._statusUpdate  = statusUpdate;
+    };
+    var ActorStatusUpdateProto = ActorStatusUpdate.prototype;
+
+    /// Retrieves the actor ID associated with this message.
+    ///
+    /// @return {string} The ID of the actor whose status has changed.
+    util.accessor( ActorStatusUpdateProto, 'getActorID', '_actorID' );
+
+    /// Retrieves the status changes.
+    ///
+    /// @return {Object.<string,*>} A map of statuses to their new values.
+    util.accessor( ActorStatusUpdateProto, 'getStatusUpdate', '_statusUpdate' );
+
+    return util.inherit( Combat.Message, ActorStatusUpdate );
 })();
