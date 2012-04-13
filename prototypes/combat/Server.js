@@ -31,10 +31,24 @@ Combat.Server = (function(){
     /// The status changes from each action are applied _after_ all actions have been resolved. This
     /// prevents inner-turn timing from affecting the results.
     function _resolveTurn(){
-        throw new Error( 'Stub' );
+        var resolutions = [];
+        for( var i in this._turnActions ){
+            resolutions.push( this._turnActions[i].resolve() );
+        }
+        this._turnActions = {};
+        for( var i in resolutions ){
+            var resolution = resolutions[i];
+            this.sendToAll(
+                new Combat.Message.ActorStatusUpdate( resolution.actorID, resolution.statusUpdate )
+            );
+        }
         _triggerNextTurn.call( this );
     }
 
+    /// Handles the perform action message by storing its action for its actorID to be resolved
+    /// during the next turn.
+    ///
+    /// @param {Combat.Message} message The message to handle.
     function _message_performAction( message ){
         util.assert.instance( message, Combat.Message.PerformAction );
         this._turnActions[message.getActorID()] = message.getAction();
