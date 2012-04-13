@@ -321,3 +321,14 @@ util.makeFlags = function( names ){
     }
     return flags;
 };
+
+/// Adds a mutator method to a class.
+///
+/// @param {Object} proto       The prototype to add the mutator to.
+/// @param {string} methodName  The name of the mutator method to create.
+/// @param {string} memberName  The name of the class member to set.
+util.mutator = function( proto, methodName, memberName ){
+    proto[methodName] = function( val ){
+        this[memberName] = val;
+    };
+};
