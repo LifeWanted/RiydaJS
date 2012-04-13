@@ -33,7 +33,7 @@ Combat.Server = (function(){
     function _resolveTurn(){
         var resolutions = [];
         for( var i in this._turnActions ){
-            resolutions.push( this._turnActions[i].resolve() );
+            util.concat( resolutions, this._turnActions[i].resolve() );
         }
         this._turnActions = {};
         for( var i in resolutions ){
