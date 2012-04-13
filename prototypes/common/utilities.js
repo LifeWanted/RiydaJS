@@ -97,6 +97,16 @@ util.assert.isString = function( str ){
     util.assert( util.isString( str ), str + ' is not a string' );
 };
 
+/// Concatenates the contents of `elems` to the end of `target`.
+///
+/// @param {array} target   The array to add the elements to.
+/// @param {array} elems    An array of elements to add.
+util.concat = function( target, elems ){
+    util.assert.isArray( target );
+    util.assert.isArray( elems );
+    Array.prototype.push.apply( target, elems );
+};
+
 /// Copies the direct properties of `src` to `dest`.
 ///
 /// @param {Object}     src     The object to copy from.
