@@ -1,0 +1,30 @@
+.displayButton {
+    text-align: center;
+    color: #241313;
+    font-weight: bold;
+    border: 3px solid #472828;
+    background: #783939;
+    width: 75px;
+    height: 25px;
+    position: absolute;
+    right: 5px;
+}
+.itemButton {
+}
+
+.information {
+    color: #DDD;
+    width: 420px;
+    position: absolute;
+    left: 5px;
+    top: 259px;
+}
+
+#equipButton {
+    position: absolute;
+    top: 259px;
+}
+#inventoryButton {
+    position: absolute;
+    top: 294px;
+}

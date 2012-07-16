@@ -1,0 +1,71 @@
+.hardPointButton {
+    text-align: center;
+    color: #611;
+    font-weight: bold;
+    border: 4px outset #842;
+    background: #973;
+    width: 100;
+    height: 25;
+}
+
+.hardPointContents{
+    background: #400;
+    border: 2px inset;
+    position: absolute;
+    top: 5;
+    left: 15;
+    width: 550;
+    height: 500;
+}
+
+.portrait {
+    background: url("portrait_lines.jpg");
+    float: left;
+    height: 507px;
+    width: 225px;
+    position:absolute;
+    top: 5px;
+    right: 125px;
+    
+}
+
+#head {
+    position: absolute;
+    top: 45;
+    right: 360px;;
+}
+#neck {
+    position: absolute;
+    top: 135px;
+    right: 5px;
+}
+#torso {
+    position: absolute;
+    top: 180px;
+    right: 360px;
+}
+#lHand {
+    position: absolute;
+    top: 225px;
+    right: 5px;
+}
+#rHand {
+    position: absolute;
+    top: 225px;
+    right: 360px;
+}
+#legs {
+    position: absolute;
+    top: 360px;
+    right: 5px;
+}
+#lFoot {
+    position: absolute;
+    top: 450px;
+    right: 5px;
+}
+#rFoot {
+    position: absolute;
+    top: 450px;
+    right: 360px;
+}
