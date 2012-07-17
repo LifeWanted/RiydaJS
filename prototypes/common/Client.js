@@ -1,5 +1,7 @@
 
-var Riyda = Riyda || {};
+// External variables.
+var Riyda   = Riyda || {};
+var util    = util  || null;
 
 /// The `Client` class should be subclassed for each specific client task.
 ///
@@ -14,14 +16,13 @@ Riyda.Client = (function(){
     ///
     /// Be sure the `Applicaiton` is constructed and initialized before creating
     /// the `Client`.
-    Client._super = function(){
+    Client._init = function(){
         util.assert( this instanceof Client );
         this._id = util.generateID();
         this._connector = new Riyda.Connector( this._id );
         this._connector.onClientReceive( _receiveMessage.bind( this ) );
         this._connector.connect();
     };
-    
     var ClientProto = Client.prototype;
 
     /// Handles receiving messges from the `Server`.
@@ -52,6 +53,6 @@ Riyda.Client = (function(){
         return this._connector;
     };
 
-    return Client;
+    return util.inherit.base( Client );
 })();
 

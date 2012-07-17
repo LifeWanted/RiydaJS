@@ -1,5 +1,7 @@
 
-var Riyda = Riyda || {};
+// External variables.
+var Riyda   = Riyda || {};
+var util    = util  || null;
 
 /// An asynchronous network connection simulator.
 ///

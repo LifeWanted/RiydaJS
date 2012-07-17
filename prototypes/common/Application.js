@@ -1,17 +1,23 @@
 
+// External variables.
 var Riyda = Riyda || {};
+var util  = util  || null;
 
 Riyda.Application = (function(){
     var _instance = null;
+
+    function Application(){
+    }
 
     /// Constructor for `Application`
     /// @constructor
     ///
     /// @throws {Error} If an instance already exists.
-    function Application(){
-        util.assert( _instance == null );
+    Application._init = function(){
+        util.assert( _instance === null );
         _instance = this;
-    }
+        this._actors = {};
+    };
     var ApplicationProto = Application.prototype;
 
     /// Retrieves the singleton instance of the `Application`.
@@ -20,7 +26,7 @@ Riyda.Application = (function(){
     ///
     /// @return {Application} The singleton instance of the application.
     Application.getSingleton = function(){
-        util.assert( _instance instanceof Application );
+        util.assert.instance( _instance, Application );
         return _instance;
     };
 
@@ -46,6 +52,23 @@ Riyda.Application = (function(){
         return this._server;
     };
 
-    return Application;
-})();
+    /// Adds an actor to the `Application`'s index.
+    ///
+    /// @param {Riyda.Actor} actor The `Actor` to add.
+    ApplicationProto.addActor = function( actor ){
+        util.assert( actor instanceof Riyda.Actor );
+        this._actors[ actor.getID() ] = actor;
+    };
 
+    /// Retrieves the identified actor.
+    ///
+    /// @param {string} actorID The ID of the `Actor` to get.
+    ///
+    /// @return {Riyda.Actor} The `Actor` requested.
+    ApplicationProto.getActor = function( actorID ){
+        util.assert( this._actors[actorID] instanceof Riyda.Actor );
+        return this._actors[actorID];
+    };
+
+    return util.inherit.base( Application );
+})();
